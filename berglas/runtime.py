@@ -1,6 +1,7 @@
 import abc
 import http.client
 import os
+from pathlib import Path
 from typing import Dict
 
 import google.auth
@@ -62,7 +63,7 @@ class CloudRunEnv(RuntimeEnv):
 
         project = self._get_from_metadata("project/project-id")
         zone = self._get_from_metadata("instance/zone")
-        region = zone[:-2]
+        region = Path(zone).name[:-2]
 
         name = f"projects/{project}/locations/{region}/revisions/{revision}"
 
