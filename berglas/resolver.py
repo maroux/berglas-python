@@ -3,6 +3,7 @@ import binascii
 import os
 import stat
 import tempfile
+from typing import Optional
 from urllib.parse import parse_qs, urlparse
 
 from Crypto.Cipher import AES
@@ -44,11 +45,11 @@ class Client:
         self.storage_client = storage.Client(client_info=APICoreClientInfo(user_agent=USER_AGENT))
         self.kms_client = kms.KeyManagementServiceClient(client_info=GAPIClientInfo(user_agent=USER_AGENT))
 
-    def _access(self, bucket_name: str, path: str) -> bytes:
+    def _access(self, bucket_name: str, path: str, generation: Optional[int] = None) -> bytes:
         """
         Get plaintext value of the secret stored at path in bucket
         """
-        blob = self.storage_client.bucket(bucket_name).get_blob(path, client=self.storage_client)
+        blob = self.storage_client.bucket(bucket_name).get_blob(path, client=self.storage_client, generation=generation)
         if not blob:
             raise AutoException("secret object not found")
 
@@ -90,6 +91,7 @@ class Client:
         bucket = parsed.netloc
         obj = parsed.path.lstrip("/")
         destination = parse_qs(parsed.query).get("destination", [""])[0]
+        generation = int(parsed.fragment or 0)
         tmpfile = None
 
         if destination in ["tmpfile", "tempfile"]:
@@ -97,7 +99,7 @@ class Client:
         elif destination:
             tmpfile = open(destination, "wb")
 
-        plaintext = self._access(bucket, obj)
+        plaintext = self._access(bucket, obj, generation=generation)
 
         if tmpfile:
             os.chmod(tmpfile.name, stat.S_IRUSR | stat.S_IWUSR)
