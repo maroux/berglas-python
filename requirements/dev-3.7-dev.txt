@@ -5,7 +5,7 @@ attrs==19.1.0             # via black, pytest
 backcall==0.1.0           # via ipython
 black==19.3b0
 cachetools==3.1.1         # via google-auth
-certifi==2019.6.16        # via requests
+certifi==2022.12.7        # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via black
 coverage==4.5.3           # via coveralls, pytest-cov
