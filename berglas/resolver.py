@@ -73,7 +73,12 @@ class Client:
             raise AutoException("invalid ciphertext: failed to parse ciphertext")
 
         try:
-            response = self.kms_client.decrypt(key, enc_dek, path.encode("UTF8"))
+            request = kms.DecryptRequest(
+                name=key,
+                ciphertext=enc_dek,
+                additional_authenticated_data=path.encode("UTF8")
+            )
+            response = self.kms_client.decrypt(request=request)
             dek = response.plaintext
         except (GoogleAPICallError, RetryError, ValueError):
             raise AutoException("failed to decrypt dek")
