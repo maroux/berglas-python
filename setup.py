@@ -56,7 +56,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["pycryptodome", "google-api-python-client", "google-cloud-storage", "google-cloud-kms>=2"],
+    install_requires=["pycryptodome", "google-api-python-client>=2", "google-cloud-storage>=2", "google-cloud-kms>=2"],
     tests_require=tests_require,
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
