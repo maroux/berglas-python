@@ -94,15 +94,13 @@ the ``pip install berglas`` defined above:
     $ pip install setuptools==58
     $ pip install -r requirements/dev-3.9.txt
 
-Updating Requirements
+Updating Requirements Files
 ~~~~~~~~~~~~~
 Update the `install_requires` variable in `setup.py` and then from the pyenv virtualenv shell run:
 .. code:: sh
 
-    $ pip install -r pip-tools
-    # Update the publish requirements file
-    $ pip-compile requirements/publish.in
-    $ pip-compile --output-file=./requirements/dev-3.9.txt requirements/dev.in
+    $ python -m pip install pip==18.0 pip-tools==3.2.0 --upgrade
+    $ make pip_compile
 
 Running Tests
 ~~~~~~~~~~~~~
