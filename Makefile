@@ -19,3 +19,9 @@ pip_compile:
 clean:
 	rm -rf usr/ etc/ *.deb build dist
 	find . -name "*.pyc" -delete
+
+release_setup: clean
+	git clean -ffdx -e .idea
+
+release: release_setup
+	./scripts/release.sh

@@ -95,7 +95,7 @@ the ``pip install berglas`` defined above:
     $ pip install -r requirements/dev-3.9.txt
 
 Updating Requirements Files
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Update the `install_requires` variable in `setup.py` and then from the pyenv virtualenv shell run:
 .. code:: sh
 
