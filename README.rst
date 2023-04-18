@@ -88,10 +88,19 @@ the ``pip install berglas`` defined above:
 
     $ git clone https://github.com/maroux/berglas-python.git
     $ cd python
-    $ pyenv virtualenv 3.7.2 berglas-3.7
+    $ pyenv virtualenv 3.9.14 berglas-3.9
     ...
-    $ pyenv shell berglas-3.7
-    $ pip install -r requirements/dev-3.7.txt
+    $ pyenv shell berglas-3.9
+    $ pip install setuptools==58
+    $ pip install -r requirements/dev-3.9.txt
+
+Updating Requirements Files
+~~~~~~~~~~~~~
+Update the `install_requires` variable in `setup.py` and then from the pyenv virtualenv shell run:
+.. code:: sh
+
+    $ python -m pip install pip==18.0 pip-tools==3.2.0 --upgrade
+    $ make pip_compile
 
 Running Tests
 ~~~~~~~~~~~~~

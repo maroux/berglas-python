@@ -5,7 +5,7 @@ if [[ -z "${PYTHON_VERSIONS}" ]]; then
     exit 1
 fi
 
-pip install pip-tools
+pip install pip-tools==3.2.0
 
 out_file=requirements/publish.txt
 # always rebuild from scratch
