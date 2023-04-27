@@ -57,7 +57,7 @@ class Client:
             raise AutoException("missing kms key in secret metadata")
 
         key = blob.metadata[METADATA_KMS_KEY]
-        data = blob.download_as_string()
+        data = blob.download_as_bytes()
         parts = data.split(b":", maxsplit=1)
         if len(parts) < 2:
             raise AutoException("invalid ciphertext: not enough parts")
